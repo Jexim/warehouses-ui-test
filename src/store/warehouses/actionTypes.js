@@ -1,0 +1,16 @@
+export const SET_SELECTED_ITEM = "warehouses.SET_SELECTED_ITEM";
+export const SET_SELECTED_LOADING = "warehouses.SET_SELECTED_LOADING";
+export const SET_SELECTED_ERROR = "warehouses.SET_SELECTED_ERROR";
+export const SET_SELECTED_PRODUCTS_ITEMS = "warehouses.SET_SELECTED_PRODUCTS_ITEMS";
+
+export const SET_SELECTED_PRODUCTS_FOR_MOVE = "warehouses.SET_SELECTED_PRODUCTS_FOR_MOVE";
+export const SET_SELECTED_PRODUCTS_FOR_DELETE = "warehouses.SET_SELECTED_PRODUCTS_FOR_DELETE";
+
+export const SET_SELECTED_PRODUCTS_ERROR = "warehouses.SET_SELECTED_PRODUCTS_ERROR";
+export const SET_SELECTED_PRODUCTS_LOADING = "warehouses.SET_SELECTED_PRODUCTS_LOADING";
+
+export const SET_LIST_ITEMS = "warehouses.SET_LIST_ITEMS";
+export const SET_LIST_LOADING = "warehouses.SET_LIST_LOADING";
+export const SET_LIST_ERROR = "warehouses.SET_LIST_ERROR";
+export const SET_LIST_PAGE = "warehouses.SET_LIST_PAGE";
+export const SET_LIST_TOTAL_COUNT = "warehouses.SET_LIST_TOTAL_COUNT";

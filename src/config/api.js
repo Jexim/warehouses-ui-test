@@ -1,0 +1,1 @@
+export const url = "https://my-json-server.typicode.com/jexim/warehouses-mock-api-test";
