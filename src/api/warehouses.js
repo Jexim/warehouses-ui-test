@@ -1,9 +1,10 @@
 import axios from "axios";
-import apiConfig from "../config/api";
+
+const apiUrl = process.env.REACT_APP_API_HOST;
 
 export async function fetchWarehousesList({ page, limit, searchString = "" }) {
   try {
-    const response = await axios.get(`${apiConfig.url}/warehouses?_page=${page}&_limit=${limit}&title_like=${searchString}`);
+    const response = await axios.get(`${apiUrl}/warehouses?_page=${page}&_limit=${limit}&title_like=${searchString}`);
 
     return {
       items: response.data,
@@ -16,7 +17,7 @@ export async function fetchWarehousesList({ page, limit, searchString = "" }) {
 
 export async function fetchWarehousesListByProduct({ productId } = {}) {
   try {
-    const response = await axios.get(`${apiConfig.url}/products/${productId}/warehousesProducts?_expand=warehouse`);
+    const response = await axios.get(`${apiUrl}/products/${productId}/warehousesProducts?_expand=warehouse`);
 
     return response.data
   } catch (error) {
@@ -27,11 +28,11 @@ export async function fetchWarehousesListByProduct({ productId } = {}) {
 export async function createWarehouse({ title, productsDistributions }) {
   try {
     const productsQuantity = productsDistributions.reduce((sum, productDistributions) => sum + productDistributions.quantity, 0);
-    const response = await axios.post(`${apiConfig.url}/warehouses`, { title, productsQuantity });
+    const response = await axios.post(`${apiUrl}/warehouses`, { title, productsQuantity });
 
     for (let productsDistribution of productsDistributions) {
       if (productsDistribution.quantity > 0) {
-        await axios.post(`${apiConfig.url}/warehousesProducts`, {
+        await axios.post(`${apiUrl}/warehousesProducts`, {
           warehouseId: response.data.id,
           productId: productsDistribution.product.id,
           quantity: productsDistribution.quantity
@@ -48,11 +49,11 @@ export async function createWarehouse({ title, productsDistributions }) {
 export async function editWarehouse({ id, title, productsDistributions, productsForDelete, productsForMove }) {
   try {
     const productsQuantity = productsDistributions.reduce((sum, productDistributions) => sum + productDistributions.quantity, 0);
-    const response = await axios.put(`${apiConfig.url}/warehouses/${id}`, { title, productsQuantity });
+    const response = await axios.put(`${apiUrl}/warehouses/${id}`, { title, productsQuantity });
 
     for (let productsDistribution of productsDistributions) {
       if (productsDistribution.isNew && productsDistribution.quantity > 0) {
-        await axios.post(`${apiConfig.url}/warehousesProducts`, {
+        await axios.post(`${apiUrl}/warehousesProducts`, {
           warehouseId: response.data.id,
           productId: productsDistribution.product.id,
           quantity: productsDistribution.quantity
@@ -60,13 +61,13 @@ export async function editWarehouse({ id, title, productsDistributions, products
       } else {
         if (productsDistribution.edited && !productsDistribution.isNew) {
           if (productsDistribution.quantity > 0) {
-            await axios.put(`${apiConfig.url}/warehousesProducts/${productsDistribution.id}`, {
+            await axios.put(`${apiUrl}/warehousesProducts/${productsDistribution.id}`, {
               warehouseId: response.data.id,
               productId: productsDistribution.product.id,
               quantity: productsDistribution.quantity
             });
           } else {
-            await axios.delete(`${apiConfig.url}/warehousesProducts/${productsDistribution.id}`);
+            await axios.delete(`${apiUrl}/warehousesProducts/${productsDistribution.id}`);
           }
         }
       }
@@ -75,16 +76,16 @@ export async function editWarehouse({ id, title, productsDistributions, products
     for (let productForMove of productsForMove) {
       for (let warehouseDistributions of productForMove.warehousesDistributions) {
         if (warehouseDistributions.quantity > 0) {
-          const responseWarehousesProducts = await axios.get(`${apiConfig.url}/warehousesProducts?productId=${productForMove.productDistributions.product.id}&warehouseId=${warehouseDistributions.warehouse.id}`);
+          const responseWarehousesProducts = await axios.get(`${apiUrl}/warehousesProducts?productId=${productForMove.productDistributions.product.id}&warehouseId=${warehouseDistributions.warehouse.id}`);
           
           if (responseWarehousesProducts.data.length) {
-            await axios.put(`${apiConfig.url}/warehousesProducts/${responseWarehousesProducts.data[0].id}`, {
+            await axios.put(`${apiUrl}/warehousesProducts/${responseWarehousesProducts.data[0].id}`, {
               warehouseId: warehouseDistributions.warehouse.id,
               productId: productForMove.productDistributions.product.id,
               quantity: responseWarehousesProducts.data[0].quantity + warehouseDistributions.quantity
             });
           } else {
-            await axios.post(`${apiConfig.url}/warehousesProducts`, {
+            await axios.post(`${apiUrl}/warehousesProducts`, {
               warehouseId: warehouseDistributions.warehouse.id,
               productId: productForMove.productDistributions.product.id,
               quantity: warehouseDistributions.quantity
@@ -95,7 +96,7 @@ export async function editWarehouse({ id, title, productsDistributions, products
     }
 
     for (const productForDelete of productsForDelete) {
-      await axios.delete(`${apiConfig.url}/warehousesProducts/${productForDelete.id}`);
+      await axios.delete(`${apiUrl}/warehousesProducts/${productForDelete.id}`);
     }
 
     return response.data;
@@ -106,7 +107,7 @@ export async function editWarehouse({ id, title, productsDistributions, products
 
 export async function removeWarehouse(warehouse) {
   try {
-    const response = await axios.delete(`${apiConfig.url}/warehouses/${warehouse.id}`);
+    const response = await axios.delete(`${apiUrl}/warehouses/${warehouse.id}`);
 
     return response.data;
   } catch (error) {
