@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as apiConfig from "../config/api";
+import apiConfig from "../config/api";
 
 export async function fetchAllProductsList({ page, limit, searchString="" } = {}) {
   try {
