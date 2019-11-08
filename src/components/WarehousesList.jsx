@@ -73,7 +73,8 @@ function mapStateToProps(state) {
     selectedItem: state.warehouses.selected.item,
     listItems: state.warehouses.list.items,
     listLoading: state.warehouses.list.loading,
-    listError: state.warehouses.list.error
+    listError: state.warehouses.list.error,
+    listTotalCount: state.warehouses.list.pagination.totalCount
   };
 }
 
