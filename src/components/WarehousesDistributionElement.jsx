@@ -88,7 +88,7 @@ class WarehousesDistributionElement extends Component {
   render() {
     return (
       <>
-        <Form.Row className="my-3">
+        <Form.Row className="mt-3">
           <Col sm="4">
             <SelectElement
               cacheUniq={this.props.warehousesDistributions}
@@ -105,6 +105,7 @@ class WarehousesDistributionElement extends Component {
           </Col>
           <Col sm="4">
             <Form.Control
+              className="mb-3"
               required
               placeholder="Quantity"
               type="number"
@@ -115,7 +116,7 @@ class WarehousesDistributionElement extends Component {
             />
           </Col>
           <Col sm="4">
-            <ButtonGroup className="w-100">
+            <ButtonGroup className="w-100 mt-3">
               <Button variant="danger" onClick={() => this.onClickRemove()}>
                 Remove
               </Button>

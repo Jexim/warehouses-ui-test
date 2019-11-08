@@ -97,7 +97,7 @@ class ProductsDistributionElement extends Component {
   render() {
     return (
       <>
-        <Form.Row className="my-3">
+        <Form.Row className="mt-3">
           <Col sm="4">
             <SelectElement
               disabled={this.state.showMove || this.props.onlyMove || !this.props.productDistributions.isNew}
