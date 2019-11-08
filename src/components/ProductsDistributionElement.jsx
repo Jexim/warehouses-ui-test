@@ -80,7 +80,7 @@ class ProductsDistributionElement extends Component {
   }
 
   resetOptions() {
-    this.setState({ productsSelectPagination: { ...this.state.productsSelectPagination, cacheVersion: this.state.productsSelectPagination.cacheVersion + 1, page: 1, totalCount: 0, count: 0 } });
+    this.setState({ productsSelectPagination: { ...this.state.productsSelectPagination, page: 1, totalCount: 0, count: 0 } });
   }
 
   onClickRemove() {

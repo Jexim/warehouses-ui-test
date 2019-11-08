@@ -85,7 +85,7 @@ class ProductsMoveElement extends Component {
   }
 
   resetOptions() {
-    this.setState({ warehousesSelectPagination: { ...this.state.warehousesSelectPagination, cacheVersion: this.state.warehousesSelectPagination.cacheVersion + 1, page: 1, totalCount: 0, count: 0 } });
+    this.setState({ warehousesSelectPagination: { ...this.state.warehousesSelectPagination, page: 1, totalCount: 0, count: 0 } });
   }
 
   render() {

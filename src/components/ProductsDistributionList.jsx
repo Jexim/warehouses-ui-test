@@ -15,14 +15,14 @@ class ProductsDistributionList extends Component {
     return (
       <>
         <h4>List of owned products</h4>
-        {!!this.props.selectedWarehouseError && <Alert variant="danger">{this.props.selectedWarehouseError.message}</Alert>}
+        {!!this.props.selectedWarehouseProductsError && <Alert variant="danger">{this.props.selectedWarehouseProductsError.message}</Alert>}
         <div>
           {this.props.selectedWarehouseProducts.map(item => (
             <ProductsDistributionElement key={item.id} productDistributions={item} onlyMove={this.props.onlyMove} />
           ))}
-          {this.props.selectedWarehouseLoading && <Loader />}
+          {this.props.selectedWarehouseProductsLoading && <Loader />}
         </div>
-        {!this.props.selectedWarehouseLoading && !this.props.onlyMove && (
+        {!this.props.selectedWarehouseProductsLoading && !this.props.onlyMove && (
           <Button block className="mt-3" onClick={() => this.onClickAddProductDistribution()}>
             Add product
           </Button>
@@ -35,8 +35,8 @@ class ProductsDistributionList extends Component {
 function mapStateToProps(state) {
   return {
     selectedWarehouseProducts: state.warehouses.selected.products.items,
-    selectedWarehouseLoading: state.warehouses.selected.products.loading,
-    selectedWarehouseError: state.warehouses.selected.products.error
+    selectedWarehouseProductsLoading: state.warehouses.selected.products.loading,
+    selectedWarehouseProductsError: state.warehouses.selected.products.error
   };
 }
 

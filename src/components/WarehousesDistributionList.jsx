@@ -17,15 +17,15 @@ class WarehousesDistributionList extends Component {
         {(!!this.props.selectedProduct.freeQuantity || !!this.props.selectedProductWarehouses.length) && (
           <>
             <h4>List of owned warehouses</h4>
-            {!!this.props.selectedProductError && <Alert variant="danger">{this.props.selectedProductError.message}</Alert>}
+            {!!this.props.selectedProductWarehousesError && <Alert variant="danger">{this.props.selectedProductWarehousesError.message}</Alert>}
             <div style={{ position: "relative" }}>
               {this.props.selectedProductWarehouses.map(item => (
                 <WarehousesDistributionElement key={item.id} warehouseDistributions={item} />
               ))}
-              {this.props.selectedProductLoading && <Loader />}
+              {this.props.selectedProductWarehousesLoading && <Loader />}
             </div>
             {this.props.selectedProduct && <div className="mb-3">Free count: {this.props.selectedProduct.freeQuantity}</div>}
-            {!this.props.selectedProductLoading && (
+            {!this.props.selectedProductWarehousesLoading && (
               <Button block onClick={() => this.onClickAddWarehousesDistribution()}>
                 Add to warehouse
               </Button>
@@ -41,8 +41,8 @@ function mapStateToProps(state) {
   return {
     selectedProduct: state.products.selected.item,
     selectedProductWarehouses: state.products.selected.warehouses.items,
-    selectedProductLoading: state.products.selected.warehouses.loading,
-    selectedProductError: state.products.selected.warehouses.error
+    selectedProductWarehousesLoading: state.products.selected.warehouses.loading,
+    selectedProductWarehousesError: state.products.selected.warehouses.error
   };
 }
 
