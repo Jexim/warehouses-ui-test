@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/warehouses-ui-test/static/css/main.595c3069.chunk.css",
-    "main.js": "/warehouses-ui-test/static/js/main.ae745b2d.chunk.js",
-    "main.js.map": "/warehouses-ui-test/static/js/main.ae745b2d.chunk.js.map",
+    "main.js": "/warehouses-ui-test/static/js/main.e8d334c1.chunk.js",
+    "main.js.map": "/warehouses-ui-test/static/js/main.e8d334c1.chunk.js.map",
     "runtime-main.js": "/warehouses-ui-test/static/js/runtime-main.282f9d51.js",
     "runtime-main.js.map": "/warehouses-ui-test/static/js/runtime-main.282f9d51.js.map",
     "static/css/2.b0bb7f2c.chunk.css": "/warehouses-ui-test/static/css/2.b0bb7f2c.chunk.css",
     "static/js/2.199157b9.chunk.js": "/warehouses-ui-test/static/js/2.199157b9.chunk.js",
     "static/js/2.199157b9.chunk.js.map": "/warehouses-ui-test/static/js/2.199157b9.chunk.js.map",
     "index.html": "/warehouses-ui-test/index.html",
-    "precache-manifest.f19e2c5393b566c813d7f83fe5e586b8.js": "/warehouses-ui-test/precache-manifest.f19e2c5393b566c813d7f83fe5e586b8.js",
+    "precache-manifest.a306faecca012239fe0a004f7a776ae1.js": "/warehouses-ui-test/precache-manifest.a306faecca012239fe0a004f7a776ae1.js",
     "service-worker.js": "/warehouses-ui-test/service-worker.js",
     "static/css/2.b0bb7f2c.chunk.css.map": "/warehouses-ui-test/static/css/2.b0bb7f2c.chunk.css.map",
     "static/css/main.595c3069.chunk.css.map": "/warehouses-ui-test/static/css/main.595c3069.chunk.css.map"
@@ -19,6 +19,6 @@
     "static/css/2.b0bb7f2c.chunk.css",
     "static/js/2.199157b9.chunk.js",
     "static/css/main.595c3069.chunk.css",
-    "static/js/main.ae745b2d.chunk.js"
+    "static/js/main.e8d334c1.chunk.js"
   ]
 }
