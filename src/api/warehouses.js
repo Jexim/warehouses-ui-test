@@ -46,9 +46,9 @@ export async function createWarehouse({ title, productsDistributions }) {
   }
 }
 
-export async function editWarehouse({ id, title, productsDistributions, productsForDelete, productsForMove }) {
+export async function editWarehouse({ id, title, productsDistributions = [], productsForDelete = [], productsForMove = []}) {
   try {
-    const productsQuantity = productsDistributions.reduce((sum, productDistributions) => sum + productDistributions.quantity, 0);
+    const productsQuantity = productsDistributions.reduce((sum, productDistributions) => sum + productDistributions.quantity, 0);    
     const response = await axios.put(`${apiUrl}/warehouses/${id}`, { title, productsQuantity });
 
     for (let productsDistribution of productsDistributions) {

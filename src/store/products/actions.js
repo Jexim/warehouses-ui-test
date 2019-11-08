@@ -116,7 +116,7 @@ export function saveProduct(withoutUpdateWarehouses) {
         }
       }
 
-      if (!withoutUpdateWarehouses) await dispatch(updateWarehouses(getState().products.selected.warehouses.items));
+      if (!withoutUpdateWarehouses) await dispatch(updateWarehouses({ warehousesDistributions: getState().products.selected.warehouses.items }));
 
       dispatch({ type: types.SET_LIST_ITEMS, items: [...items] });
       dispatch({ type: types.SET_SELECTED_LOADING, loading: false });
@@ -134,7 +134,7 @@ export function removeProduct() {
       dispatch({ type: types.SET_SELECTED_LOADING, loading: true });
 
       await productsApi.removeProduct(getState().products.selected.item);
-      await dispatch(updateWarehouses(getState().products.selected.warehouses.items));
+      await dispatch(updateWarehouses({ warehousesDistributions: getState().products.selected.warehouses.items, skipEdited: true }));
 
       dispatch({ type: types.SET_LIST_TOTAL_COUNT, totalCount: getState().products.list.pagination.totalCount - 1 });
       dispatch({ type: types.SET_LIST_ITEMS, items: [...getState().products.list.items.filter(item => item.id !== getState().products.selected.item.id)] });
@@ -238,10 +238,10 @@ export function addProductForDelete(warehouseDistributions) {
   };
 }
 
-export function updateWarehouses(warehousesDistributions) {
+export function updateWarehouses({ warehousesDistributions, skipEdited }) {
   return async (dispatch, getState) => {
     for (let warehouseDistributions of warehousesDistributions) {
-      if (warehouseDistributions.edited) {
+      if ((warehouseDistributions.edited, skipEdited)) {
         await dispatch(warehousesActions.reloadWarehouse(warehouseDistributions.warehouse));
 
         if (warehouseDistributions.firstWarehouse) await dispatch(warehousesActions.reloadWarehouse(warehouseDistributions.firstWarehouse));

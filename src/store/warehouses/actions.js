@@ -116,7 +116,7 @@ export function editWarehouse({ title }, withoutUpdateWarehouses) {
 
       if (!withoutUpdateWarehouses) {
         await dispatch(updateProducts({ productsDistributions, productsForDelete }));
-        await dispatch(updateWarehousesByMove({ productsForMove }));
+        dispatch(updateWarehousesByMove({ productsForMove }));
       }
 
       dispatch({ type: types.SET_LIST_ITEMS, items: [...items] });
@@ -139,7 +139,7 @@ export function removeWarehouse() {
       const productsDistributions = getState().warehouses.selected.products.items;
       const productsForDelete = getState().warehouses.selected.productsForDelete;
 
-      await dispatch(updateProducts({ productsDistributions, productsForDelete }));
+      await dispatch(updateProducts({ productsDistributions, productsForDelete, skipEdited: true }));
 
       dispatch({ type: types.SET_LIST_TOTAL_COUNT, totalCount: getState().warehouses.list.pagination.totalCount - 1 });
       dispatch({ type: types.SET_LIST_ITEMS, items: [...getState().warehouses.list.items.filter(item => item.id !== getState().warehouses.selected.item.id)] });
@@ -363,10 +363,10 @@ export function addProductForDelete(productDistributions) {
   };
 }
 
-export function updateProducts({ productsDistributions, productsForDelete = [] }) {
+export function updateProducts({ productsDistributions, productsForDelete = [], skipEdited }) {
   return async dispatch => {
     for (let productDistributions of productsDistributions) {
-      if (productDistributions.edited) {
+      if (productDistributions.edited || skipEdited) {
         await dispatch(productsActions.reloadProuduct(productDistributions.product));
 
         if (productDistributions.firstProduct) await dispatch(productsActions.reloadProuduct(productDistributions.firstProduct));
@@ -385,10 +385,14 @@ export function updateWarehousesByMove({ productsForMove }) {
 
     for (const productForMove of productsForMove) {
       for (const warehouseDistributions of productForMove.warehousesDistributions) {
-        const indexOfEditedWarehouse = items.findIndex(warehouseItem => warehouseItem.id === warehouseDistributions.warehouse.id);
+        if (warehouseDistributions.quantity > 0) {
+          const indexOfEditedWarehouse = items.findIndex(warehouseItem => warehouseItem.id === warehouseDistributions.warehouse.id);
+          const productsDistributions = await productsApi.fetchProductsListByWarehouse({ warehouseId: warehouseDistributions.warehouse.id })
+          const warehouse = await warehousesApi.editWarehouse({...warehouseDistributions.warehouse, productsDistributions});
 
-        if (indexOfEditedWarehouse !== -1) {
-          items[indexOfEditedWarehouse].productsQuantity += warehouseDistributions.quantity;
+          if (indexOfEditedWarehouse !== -1) {
+            items[indexOfEditedWarehouse] = warehouse;
+          }
         }
       }
     }
