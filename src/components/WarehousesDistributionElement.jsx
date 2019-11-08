@@ -116,7 +116,7 @@ class WarehousesDistributionElement extends Component {
             />
           </Col>
           <Col sm="4">
-            <ButtonGroup className="w-100 mt-3">
+            <ButtonGroup className="w-100">
               <Button variant="danger" onClick={() => this.onClickRemove()}>
                 Remove
               </Button>
