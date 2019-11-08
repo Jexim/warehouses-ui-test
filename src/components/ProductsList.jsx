@@ -10,13 +10,14 @@ class ProductsList extends Component {
   state = {
     showProductModal: false
   };
+  scrollContainer = null;
 
   async componentDidMount() {
-    this.feachMoreProducts();
-  }
+    await this.props.dispatch(productsActions.fetchProducts());
 
-  feachMoreProducts() {
-    if (!this.props.listLoading) this.props.dispatch(productsActions.fetchProducts());
+    while (this.scrollContainer.scrollHeight <= this.scrollContainer.clientHeight && this.props.listItems.length < this.props.listTotalCount) {
+      await this.props.dispatch(productsActions.fetchProducts());
+    }
   }
 
   onClickProduct(product) {
@@ -30,7 +31,7 @@ class ProductsList extends Component {
 
   onScrollList(element) {
     if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-      this.feachMoreProducts();
+      this.props.dispatch(productsActions.fetchProducts());
     }
   }
 
@@ -44,14 +45,14 @@ class ProductsList extends Component {
         </div>
         {!!this.props.listError && <Alert variant="danger">{this.props.listError.message}</Alert>}
         <div style={{ position: "relative" }}>
-          <div style={{ height: "calc(100vh - 96px)", overflow: "auto" }} onScroll={e => this.onScrollList(e.target)}>
+          <div className="list-container" onScroll={e => this.onScrollList(e.target)} ref={ref => (this.scrollContainer = ref)}>
             <Table striped bordered hover className="mb-0">
               <thead>
                 <tr>
                   <th>#</th>
                   <th>Title</th>
                   <th>Free</th>
-                  <th>Quantity</th>            
+                  <th>Quantity</th>
                 </tr>
               </thead>
               <tbody>
@@ -78,6 +79,7 @@ function mapStateToProps(state) {
     selectedWarehouse: state.warehouses.selected.item,
     selectedItem: state.products.selected.item,
     listItems: state.products.list.items,
+    listTotalCount: state.products.list.pagination.totalCount,
     listLoading: state.products.list.loading,
     listError: state.products.list.error
   };

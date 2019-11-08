@@ -1,0 +1,17 @@
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_mixins";
+@import "bootstrap/scss/_variables";
+
+.list-container {
+  max-height: calc(100vh - 98px);
+  overflow: auto;
+}
+
+@include media-breakpoint-down(sm) {
+  .full-height {
+    max-height: 50vh;
+  }
+  .list-container {
+    max-height: calc(50vh - 98px);
+  }
+}

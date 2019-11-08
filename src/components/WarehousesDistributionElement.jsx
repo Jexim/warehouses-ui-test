@@ -89,7 +89,7 @@ class WarehousesDistributionElement extends Component {
     return (
       <>
         <Form.Row className="my-3">
-          <Col>
+          <Col sm="4">
             <SelectElement
               cacheUniq={this.props.warehousesDistributions}
               reduceOptions={(prevOptions, loadedOptions) => this.reduceSelectOptions(prevOptions, loadedOptions)}
@@ -103,7 +103,7 @@ class WarehousesDistributionElement extends Component {
               }
             />
           </Col>
-          <Col>
+          <Col sm="4">
             <Form.Control
               required
               placeholder="Quantity"
@@ -114,8 +114,8 @@ class WarehousesDistributionElement extends Component {
               onChange={e => this.onChangeQuantity(+e.target.value)}
             />
           </Col>
-          <Col>
-            <ButtonGroup style={{ width: 160 }}>
+          <Col sm="4">
+            <ButtonGroup className="w-100">
               <Button variant="danger" onClick={() => this.onClickRemove()}>
                 Remove
               </Button>

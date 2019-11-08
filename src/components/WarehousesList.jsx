@@ -10,13 +10,14 @@ class WarehousesList extends Component {
   state = {
     showWarehouseModal: false
   };
+  scrollContainer = null;
 
-  componentDidMount() {
-    this.feachMoreWarehouses();
-  }
+  async componentDidMount() {
+    await this.props.dispatch(wrehousesAction.fetchWarehouses());
 
-  feachMoreWarehouses() {
-    this.props.dispatch(wrehousesAction.fetchWarehouses());
+    while (this.scrollContainer.scrollHeight <= this.scrollContainer.clientHeight && this.props.listItems.length < this.props.listTotalCount) {
+      await this.props.dispatch(wrehousesAction.fetchWarehouses());
+    }
   }
 
   onClickWarehouse(warehouse) {
@@ -26,7 +27,7 @@ class WarehousesList extends Component {
 
   onScrollList(element) {
     if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-      this.feachMoreWarehouses();
+      this.props.dispatch(wrehousesAction.fetchWarehouses());
     }
   }
 
@@ -40,7 +41,7 @@ class WarehousesList extends Component {
         </div>
         {!!this.props.listError && <Alert variant="danger">{this.props.listError.message}</Alert>}
         <div style={{ position: "relative" }}>
-          <div style={{ height: "calc(100vh - 98px)", overflow: "auto" }} onScroll={e => this.onScrollList(e.target)}>
+          <div className="list-container" onScroll={e => this.onScrollList(e.target)} ref={ref => (this.scrollContainer = ref)}>
           <Table striped bordered hover className="mb-0">
               <thead>
                 <tr>

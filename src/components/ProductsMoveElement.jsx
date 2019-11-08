@@ -91,7 +91,7 @@ class ProductsMoveElement extends Component {
   render() {
     return (
       <Form.Row className="py-3 mb-3" style={{ backgroundColor: "#ddd", borderRadius: 3 }}>
-        <Col>
+        <Col sm="4">
           <SelectElement
             cacheUniq={this.props.warehousesDistributions}
             reduceOptions={(prevOptions, loadedOptions) => this.reduceOptions(prevOptions, loadedOptions)}
@@ -99,7 +99,7 @@ class ProductsMoveElement extends Component {
             onChange={e => this.onChangeWarehouse(e)}
           />
         </Col>
-        <Col>
+        <Col sm="4">
           <Form.Control
             required
             placeholder="Quantity"
@@ -110,8 +110,8 @@ class ProductsMoveElement extends Component {
             onChange={e => this.onChangeQuantity(+e.target.value)}
           />
         </Col>
-        <Col>
-          <Button block variant="danger" onClick={() => this.onClickRemove()} style={{ width: 160 }}>
+        <Col sm="4">
+          <Button block variant="danger" onClick={() => this.onClickRemove()} className="w-100">
             Remove
           </Button>
         </Col>

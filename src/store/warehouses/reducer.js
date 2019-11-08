@@ -19,7 +19,7 @@ const initialState = {
     loading: false,
     pagination: {
       page: 1,
-      limit: 20,
+      limit: 10,
       totalCount: 0
     }
   }

@@ -98,7 +98,7 @@ class ProductsDistributionElement extends Component {
     return (
       <>
         <Form.Row className="my-3">
-          <Col>
+          <Col sm="4">
             <SelectElement
               disabled={this.state.showMove || this.props.onlyMove || !this.props.productDistributions.isNew}
               cacheUniq={this.props.productsDistributions}
@@ -113,7 +113,7 @@ class ProductsDistributionElement extends Component {
               }
             />
           </Col>
-          <Col>
+          <Col sm="4">
             <InputGroup className="mb-3">
               <FormControl
                 placeholder="Quantity"
@@ -133,8 +133,8 @@ class ProductsDistributionElement extends Component {
               )}
             </InputGroup>
           </Col>
-          <Col>
-            <ButtonGroup style={{ width: 160 }}>
+          <Col sm="4">
+            <ButtonGroup className="w-100">
               {!this.props.onlyMove && (
                 <Button variant="danger" onClick={() => this.onClickRemove()}>
                   Remove

@@ -7,6 +7,7 @@ import ProductsList from "./components/ProductsList";
 import store from "./store";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.scss";
 
 export default class App extends Component {
   render() {

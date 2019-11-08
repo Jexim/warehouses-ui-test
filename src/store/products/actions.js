@@ -241,7 +241,7 @@ export function addProductForDelete(warehouseDistributions) {
 export function updateWarehouses({ warehousesDistributions, skipEdited }) {
   return async (dispatch, getState) => {
     for (let warehouseDistributions of warehousesDistributions) {
-      if ((warehouseDistributions.edited, skipEdited)) {
+      if (warehouseDistributions.edited || skipEdited) {
         await dispatch(warehousesActions.reloadWarehouse(warehouseDistributions.warehouse));
 
         if (warehouseDistributions.firstWarehouse) await dispatch(warehousesActions.reloadWarehouse(warehouseDistributions.firstWarehouse));
