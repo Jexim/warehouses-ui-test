@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8d6ef314ee9fdf84ec002ebad99960d2",
+    "revision": "009908fad9b1fc4bd9e6ab613741b1b0",
     "url": "/warehouses-ui-test/index.html"
   },
   {
@@ -8,15 +8,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/warehouses-ui-test/static/css/2.b0bb7f2c.chunk.css"
   },
   {
-    "revision": "a1c0c68f90ca09c45d57",
-    "url": "/warehouses-ui-test/static/css/main.f6c71a2e.chunk.css"
+    "revision": "6e556b7ebb478fd51808",
+    "url": "/warehouses-ui-test/static/css/main.595c3069.chunk.css"
   },
   {
     "revision": "a980f76194ae6ac6e3f6",
     "url": "/warehouses-ui-test/static/js/2.199157b9.chunk.js"
   },
   {
-    "revision": "a1c0c68f90ca09c45d57",
+    "revision": "6e556b7ebb478fd51808",
     "url": "/warehouses-ui-test/static/js/main.7f2ef217.chunk.js"
   },
   {
