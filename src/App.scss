@@ -3,7 +3,7 @@
 @import "bootstrap/scss/_variables";
 
 .list-container {
-  max-height: calc(100vh - 98px);
+  height: calc(100vh - 98px);
   overflow: auto;
 }
 
@@ -12,6 +12,6 @@
     max-height: 50vh;
   }
   .list-container {
-    max-height: calc(50vh - 98px);
+    height: calc(50vh - 98px);
   }
 }
